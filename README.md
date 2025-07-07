@@ -145,3 +145,12 @@ chrome_extension_current/
 ├── manifest.json
 └── README.md
 ```
+---
+
+## 🖼️ Sample Usage
+
+Below is a screenshot of StoreAppLens in action, showing the DevTools panel, app selection, and formatted output:
+
+![Sample Usage](usage-sample.png)
+
+---
