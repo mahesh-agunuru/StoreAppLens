@@ -1,0 +1,17 @@
+{
+    "instanceURL": "http://localhost:8080/",
+    "username": "admin",
+    "password": "admin",
+    "plugins": ["com.snc.planned_task_v2"],
+    "apps": [
+        {
+            "type": "NEXUS_REPOSITORY",
+            "groupId": "com.snc",
+            "artifactId": "app-install-base",
+            "version": "2.0.0"
+        }      
+    ],
+    "hooks": {
+        "preDeploy": ""
+    }
+}

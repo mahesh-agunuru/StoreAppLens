@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>StoreAppLens DevTools Panel</title>
+  <meta charset="utf-8" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="popup.html" /> <!-- Reuse styles from popup.html if possible -->
+</head>
+<body style="margin:0;padding:0;">
+  <!-- The main UI copied from popup.html -->
+  <div id="loginContainer" style="text-align: center; padding: 20px;">
+    <h2 style="margin-top: 0;">StoreAppLens</h2>
+    <p>Please log in to your BuildTools1 instance</p>
+    <button id="loginButton" class="action-button" 
+            style="background-color: #81bc01; color: white; border: none; 
+                   padding: 10px 20px; border-radius: 4px; cursor: pointer;
+                   font-size: 14px; font-weight: 500;">
+      Login to BuildTools1
+    </button>
+    <p id="loginStatus" style="margin-top: 15px; color: #666; font-size: 13px;">
+      You'll be redirected to BuildTools1 to log in.<br>
+      <span style="color:#c00;font-weight:500;">After logging in, switch back here and refresh or click anywhere in the ServiceNow UI to capture your session.</span>
+    </p>
+    <button id="manualCheckButton" class="sn-btn sn-btn--primary" style="margin-top:10px;background:#0072C6; color:#fff; border-radius:6px; padding:8px 20px; font-size:15px; border:none; box-shadow:0 1px 2px rgba(0,0,0,0.04);">Check for Session</button>
+  </div>
+
+  <div id="mainContent" style="display: none;">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <h2 style="margin-top: 0; color: #0072C6; letter-spacing: 0.5px;">StoreAppLens</h2>
+      <button id="logoutBtn" class="sn-btn sn-btn--tertiary" style="padding: 4px 16px; font-size: 14px; border-radius: 6px; border: none; color: #0366d6; background: #f5f8fa; box-shadow: none; cursor: pointer;">Logout</button>
+    </div>
+    <div class="sn-form-group" style="margin-bottom: 18px;">
+      <label for="release" class="sn-label" style="display: block; margin-bottom: 6px; font-weight: 500; color: #222;">Family Release</label>
+      <select id="release" class="sn-select" style="width: 100%; padding: 8px 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 15px;">
+        <option value="yokohama">Yokohama</option>
+        <option value="xanadu">Xanadu</option>
+        <option value="washington">Washington</option>
+      </select>
+    </div>
+    <div style="margin: 18px 0 0 0; display: flex; justify-content: center;">
+      <button id="callApi" class="sn-btn sn-btn--primary" style="background: #0072C6; color: #fff; border-radius: 6px; padding: 12px 32px; font-size: 16px; font-weight: 600; border: none; box-shadow: 0 2px 6px rgba(0,0,0,0.07);" title="Query dependencies for selected apps">Get Dependencies</button>
+    </div>
+    <div style="margin: 18px 0 0 0; display: flex; gap: 8px; justify-content: center;">
+      <button id="tdTemplateButton" class="sn-btn sn-btn--outline" style="border: 2px solid #0072C6; color: #0072C6; background: #fff; border-radius: 6px; padding: 8px 18px; font-size: 14px; font-weight: 500;" title="Show output in TD Template format" disabled>TD Template</button>
+      <button id="pomFormatButton" class="sn-btn sn-btn--outline" style="border: 2px solid #0072C6; color: #0072C6; background: #fff; border-radius: 6px; padding: 8px 18px; font-size: 14px; font-weight: 500;" title="Show output in Test Project POM format" disabled>Test Project POM</button>
+      <button id="snAppDeployButton" class="sn-btn sn-btn--outline" style="border: 2px solid #0072C6; color: #0072C6; background: #fff; border-radius: 6px; padding: 8px 18px; font-size: 14px; font-weight: 500;" title="Show output in SN App Deploy format" disabled>SN App Deploy</button>
+    </div>
+    <div style="margin: 18px 0 16px 0; display: flex; gap: 8px; justify-content: center;">
+      <button id="copyButton" class="sn-btn sn-btn--secondary" style="background: #e6f1fa; color: #0072C6; border-radius: 6px; padding: 8px 18px; font-size: 14px; border: none; font-weight: 500;" title="Copy the output to clipboard" disabled>Copy Output</button>
+      <button id="downloadButton" class="sn-btn sn-btn--tertiary" style="background: #f5f8fa; color: #222; border-radius: 6px; padding: 8px 18px; font-size: 14px; border: none; font-weight: 500;" title="Download the output as a file" disabled>Download Output</button>
+    </div>
+    <div id="formattedOutput" style="white-space: pre-wrap; background: #fff; border: 1px solid #d1d9e6; border-radius: 4px; padding: 15px; min-height: 120px; margin-bottom: 16px;"></div>
+  </div>
+  <script src="devtools_panel.js"></script>
+</body>
+</html>
