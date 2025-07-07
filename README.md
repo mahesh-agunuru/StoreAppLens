@@ -1,6 +1,25 @@
 # StoreAppLens Chrome Extension
 
-A Chrome DevTools extension for ServiceNow Store App dependency analysis and export.
+## Why StoreAppLens? 🚦
+
+**The Challenge: Manual Dependency Management**
+
+After every release, teams must manually review each app record in BuildTools1 (BT1) to:
+- Find the latest release version for every app.
+- Identify new or removed transitive dependencies for all direct dependencies.
+- Update TD templates, Test Project POMs, and sn-app-deploy plans with this information.
+
+For teams like SOM, with 20–25 dependencies per release, this process is tedious, error-prone, and time-consuming.
+
+**How StoreAppLens Solves This:**
+
+- **Automates dependency gathering:** Instantly collects all direct and transitive dependency versions from BT1 using the Table API.
+- **One-click format conversion:** Converts the retrieved data into TD template, Test Project POM, or sn-app-deploy formats.
+- **Speeds up template creation:** Makes it easy to generate TD templates with specific release versions, especially when PMs request templates for targeted releases.
+- **Accelerates debugging:** Expedites the setup of sn-app-deploy plans for troubleshooting issues in previous versions.
+- **Reduces manual errors:** Minimizes the risk of mistakes when fetching and assembling dependency information.
+
+With StoreAppLens, you can manage ServiceNow Store App dependencies quickly, accurately, and with far less manual effort.
 
 ---
 
@@ -126,4 +145,3 @@ chrome_extension_current/
 ├── manifest.json
 └── README.md
 ```
-
