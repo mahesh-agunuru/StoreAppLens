@@ -269,11 +269,34 @@ async function main() {
     }
   });
 
-  let appRepoArtifactTableUrl = BT1_TABLE_API + APP_REPO_ARTIFACT_TABLE + '?sysparm_query=scopeIN' + scopeList;
-  let appartifactData = await makeApiCall(appRepoArtifactTableUrl);
+  // Chunked fetch for artifact data to avoid ServiceNow IN-query pagination limits
+  function chunkArray(arr, chunkSize) {
+    const results = [];
+    for (let i = 0; i < arr.length; i += chunkSize) {
+      results.push(arr.slice(i, i + chunkSize));
+    }
+    return results;
+  }
+  async function fetchAllArtifactsForScopes(scopes, makeApiCall, chunkSize = 50) {
+    let allResults = [];
+    const chunks = chunkArray(scopes, chunkSize);
+    for (const chunk of chunks) {
+      const query = 'scopeIN' + chunk.join(',');
+      const url = BT1_TABLE_API + APP_REPO_ARTIFACT_TABLE + '?sysparm_query=' + encodeURIComponent(query) + '&sysparm_limit=1000';
+      const response = await makeApiCall(url);
+      if (response.result && response.result.length > 0) {
+        allResults = allResults.concat(response.result);
+      }
+    }
+    return allResults;
+  }
+  // Parse scopeList into array (remove trailing comma, split by comma)
+  let scopeArr = scopeList.replace(/,$/, '').split(',').map(s => s.trim()).filter(Boolean);
+  let appartifactDataArr = await fetchAllArtifactsForScopes(scopeArr, makeApiCall, 50);
+
   let artifactMap = {};
-  if (appartifactData.result && appartifactData.result.length > 0) {
-    appartifactData.result.forEach((artifact) => {
+  if (appartifactDataArr && appartifactDataArr.length > 0) {
+    appartifactDataArr.forEach((artifact) => {
       artifactMap[artifact.scope] = artifact;
     });
   }
