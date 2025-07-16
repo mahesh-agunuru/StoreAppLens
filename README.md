@@ -1,6 +1,6 @@
 This repository has moved!
 
-🔗 New Location: [https://github.com/my-company/my-repo](https://code.devsnc.com/mahesh-agunuru/StoreAppLens)
+🔗 New Location: [https://code.devsnc.com/mahesh-agunuru/StoreAppLens](https://code.devsnc.com/mahesh-agunuru/StoreAppLens)
 
 
 # StoreAppLens Chrome Extension
